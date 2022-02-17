@@ -1,0 +1,39 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid p-4">
+    <h2><%= @list.name %></h2>
+    <button class="btn-alert"><%= link_to 'Add a movie', new_list_bookmark_path(@list) %></button>
+    <button class="btn-alert"><%= link_to "Back to Lists", lists_path %></button>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="card-show-title">
+    <h1>Movies 🎬</h1>
+  </div>
+    <div class="row cards-movie">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-6 col-12-sm">
+          <div class="card-movie">
+          <div class="card-poster">
+              <%= image_tag bookmark.movie.poster_url, alt: "movie poster" %>
+          </div>
+          <div class="card-description">
+            <div class="card-title">
+              <h5><%= bookmark.movie.title %></h5>
+              <p> <%= bookmark.movie.rating %> ⭐️</p>
+            </div>
+            <div class="card-overview">
+              <p> <%= bookmark.movie.overview %> </p>
+            </div>
+            <hr>
+              <p><strong>Review</strong></p>
+            <div class="card-review">
+              <p><%= bookmark.comment %></p>
+            <button class="btn-alert"><%= link_to "Delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+</div>
